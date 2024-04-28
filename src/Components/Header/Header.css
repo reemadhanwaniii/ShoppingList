@@ -1,20 +1,21 @@
-.header-wrapper{
+.header-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.header-text{
+.header-text {
     letter-spacing: 1rem;
-    font-size: 3rem;
+    font-size: 2rem;
+    color: #9e7db3;
 }
 
-.header-image-wrapper{
+.header-image-wrapper {
     height: 300px;
     width: 300px;
 }
-.header-img{
+.header-img {
     max-width: 100%;
     max-height: 100%;
 }

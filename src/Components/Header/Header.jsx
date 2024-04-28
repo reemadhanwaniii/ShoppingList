@@ -4,7 +4,7 @@ import './Header.css';
 function Header() {
     return(
         <div className="header-wrapper">
-            <h1 img="header-text">
+            <h1 className="header-text">
                 Shopping List
             </h1>
             <div className="header-image-wrapper">
