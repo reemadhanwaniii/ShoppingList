@@ -1,4 +1,5 @@
 import './InputItem.css';
+import { showSuccess } from '../../utils/showToast';
 
 function InputItem(){
     return(
@@ -7,7 +8,8 @@ function InputItem(){
                 type="text"
                 placeholder="Add an Item...."
             />
-            <button className='add-item-btn'>
+            <button className='add-item-btn'
+                    onClick={()=>showSuccess('Successfully added item')}>
                 Add
             </button>
         </div>
