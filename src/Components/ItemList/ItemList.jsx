@@ -6,7 +6,7 @@ import { showError } from '../../utils/showToast';
 import React from 'react';
 
 function ItemList({ shoppingItems,addQuantity,descQuantity }){
-
+    console.log("inside itemlist ")
     return(
         <div className='shopping-items-wrapper'>
             {
