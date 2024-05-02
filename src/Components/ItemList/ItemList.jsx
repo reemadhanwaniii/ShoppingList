@@ -3,10 +3,14 @@ import './ItemList.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { showError } from '../../utils/showToast';
-import React from 'react';
+import React, { useContext } from 'react';
+import { ShoppingItemsContext,ShoppingDispatchContext } from '../../providers/ShoppingContext';
 
-function ItemList({ shoppingItems,addQuantity,descQuantity }){
-    console.log("inside itemlist ")
+function ItemList(){
+    
+    const shoppingItems = useContext(ShoppingItemsContext);
+    const dispatch = useContext(ShoppingDispatchContext);
+
     return(
         <div className='shopping-items-wrapper'>
             {
@@ -14,7 +18,12 @@ function ItemList({ shoppingItems,addQuantity,descQuantity }){
                     return (
                         <div key={item.id} className='items-list'>
                             <div className='change-quantity add-item'
-                                onClick={()=>addQuantity(item.id)}
+                                onClick={()=>{
+                                    dispatch({
+                                        type: 'increment_item',
+                                        itemId: item.id
+                                       })
+                                }}
                             >
                                 <FontAwesomeIcon icon={faPlus} />
                             </div>
@@ -25,7 +34,10 @@ function ItemList({ shoppingItems,addQuantity,descQuantity }){
                             <div className='change-quantity remove-item'
                                 onClick={()=>{
                                     if(item.quantity == 1) showError(`${item.name} removed from the list`)
-                                    descQuantity(item.id)
+                                    dispatch({
+                                        type: 'decrement_item',
+                                        itemId: item.id
+                                      })
                                 }}
                             >
                                 <FontAwesomeIcon icon={faMinus} />

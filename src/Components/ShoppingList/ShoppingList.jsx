@@ -8,7 +8,7 @@ import { useReducer } from "react";
 import itemReducer from "../../reducers/itemReducer";
 // import { v4 as uuidv4 } from 'uuid';
 // import { useState } from "react";
-
+import { ShoppingDispatchContext,ShoppingItemsContext } from "../../providers/ShoppingContext";
 
 
 function ShoppingList() {
@@ -16,41 +16,19 @@ function ShoppingList() {
     //const [shoppingItems,setShoppingItems] = useState([]);
     const [shoppingItems,dispatch] = useReducer(itemReducer,[]);
 
-    function handleAddItem(name) {
-      dispatch({
-        type: 'add_item',
-        itemName: name
-      })
-    }
-
-    function handleAddQuantity(id){
-       dispatch({
-        type: 'increment_item',
-        itemId: id
-       })
-    }
-
-    function handleDescQuantity(id){
-      dispatch({
-        type: 'decrement_item',
-        itemId: id
-      })
-    }
-    
-
+   
     return(
         <>
+        <ShoppingItemsContext.Provider value={shoppingItems}>
+            <ShoppingDispatchContext.Provider value={dispatch}>
             <Header/>
             <ToastContainer/>
             <div className="shopping-input">
-                <InputItem
-                  addItem={handleAddItem}
-                />
-                <ItemList
-                 shoppingItems={shoppingItems}
-                 addQuantity={handleAddQuantity}
-                 descQuantity={handleDescQuantity}/>
+                <InputItem/>
+                <ItemList/>
             </div>
+            </ShoppingDispatchContext.Provider>
+          </ShoppingItemsContext.Provider>
         </>
     )
 }

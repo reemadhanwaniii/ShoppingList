@@ -1,13 +1,16 @@
 import './InputItem.css';
 import { showError, showSuccess } from '../../utils/showToast';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { ShoppingDispatchContext,ShoppingItemsContext } from '../../providers/ShoppingContext';
 
-function InputItem({ addItem }){
+function InputItem() {
     //console.log(uuidv4());
 
 
     const { register,handleSubmit, formState: { errors }} = useForm({mode: 'onChange'});
+
+    const dispatch  = useContext(ShoppingDispatchContext);
 
     const handleFormSubmit = (data) => {
         // e.preventDefault();
@@ -18,6 +21,11 @@ function InputItem({ addItem }){
 
         addItem(data.item);
         showSuccess('Successfully added item')
+
+        dispatch({
+            type: 'add_item',
+            itemName: data.item
+        })
     }
 
 
